@@ -1,0 +1,248 @@
+<!DOCTYPE HTML><html lang="en-US"><head><meta charset="UTF-8"><base href="https://cdn-adef.akamaized.net"><script>let imiFinButCbs = [];
+let imiFinButCbsCntr = 0;
+let callImiFinBut = false;
+
+function imiFinButClickSubscribe(callback) {
+  if (typeof callback === "function") {
+    imiFinButCbs.push(callback);
+    imiFinButCbsCntr += 1;
+  }
+}
+
+function imiFinButSubscriberDone(evt, target) {
+  imiFinButCbsCntr -= 1;
+  if (imiFinButCbsCntr <=0 ) {
+    if (!callImiFinBut) {
+      callImiFinBut = true;
+      target.dispatchEvent(evt);
+    }
+  }
+}
+
+document.addEventListener("DOMContentLoaded", function (){
+  let btns = document.getElementsByTagName("a");
+  let lI = -1;
+  for (let i=0; i<btns.length; i++) {
+    if (btns[i].getAttribute("class") !== null && btns[i].getAttribute("class").indexOf("btn-fin") !== -1 && btns[i].getAttribute("href") === "http://onlineplus.click/site/redirectpage?ca=link&sid=285964&hid=543988&hv=hoyzg6686b992000c315c&r=H4sIAAAAAAAA%2FxTES47CMAwG4Nt4W%2F9xorgLa44yMiZIoSxaLMTj9IjNt8SCIV5Hk3JBdK78l7DCslbKYoByZ6EUa1i1UzY7eWyPHHeK24ztf57Nu7rLp5Xj0Ke8XZ3meO27ga74IYZvAAAA%2F%2F%2FxT%2F%2FfagAAAA%3D%3D") {
+      lI = i;
+    } else if (btns[i].getAttribute("class") !== null && btns[i].getAttribute("class").indexOf("btn-fin") !== -1) {
+      lI = i;
+    } else if (btns[i].getAttribute("href") === "http://onlineplus.click/site/redirectpage?ca=link&sid=285964&hid=543988&hv=hoyzg6686b992000c315c&r=H4sIAAAAAAAA%2FxTES47CMAwG4Nt4W%2F9xorgLa44yMiZIoSxaLMTj9IjNt8SCIV5Hk3JBdK78l7DCslbKYoByZ6EUa1i1UzY7eWyPHHeK24ztf57Nu7rLp5Xj0Ke8XZ3meO27ga74IYZvAAAA%2F%2F%2FxT%2F%2FfagAAAA%3D%3D") {
+      lI = i;
+    }
+  }
+  if (lI > -1) {
+    function imiFinButClick(ev) {
+      if (imiFinButCbs.length > 0) {
+        let oev = new ev.constructor(ev.type, ev);
+        let trgt = ev.target;
+        ev.preventDefault();
+        ev.stopImmediatePropagation();
+        trgt.removeEventListener("click", imiFinButClick);
+        for (let i = 0; i < imiFinButCbs.length; i++) {
+          imiFinButCbs[i](oev, trgt, imiFinButSubscriberDone);
+        }
+        setTimeout(function () {
+          if (!callImiFinBut) {
+               callImiFinBut = true;
+               trgt.dispatchEvent(oev);
+          }
+        }, 1000);
+      }
+    }
+
+    btns[lI].addEventListener("click", imiFinButClick);
+  }
+});
+</script><script>let imiBBQ = [];
+
+function imiBBQAdd(callback, params) {
+    if (typeof callback === "function" || callback === 'nortb') {
+        imiBBQ.push({fnc: callback, p: params});
+    }
+}
+
+function imiBB() {
+    if (typeof ortbConf !== "undefined" && ortbConf !== null && typeof ortbConf === "object") {
+        if (ortbConf.hasOwnProperty("force_bub") && ortbConf.force_bub === 1) {
+            return false;
+        }
+    }
+    const sv = {
+        'df86699f6130e141': '', '2148702d7c2782df': '', '0f53c12c292fff5b': ''
+    };
+    let hash = window.location.pathname.replace('/c/', '');
+    let url = window.location.protocol + '//' + window.location.host + window.location.pathname;
+
+    if (hash.length === 0) {
+        hash = location.search.replace(/.*utm_source=([^&]*).*|(.*)/, '$1');
+    }
+
+    if (hash && hash.length > 1 && sv[hash]) {
+        url = window.location.protocol + '//' + window.location.host + window.location.pathname.replace('/c/' + hash, '/c/' + sv[hash]);
+    }
+    let curHref = window.location.href;
+    let lQuery = window.location.search.replace("?", "").split('&');
+    let nQuery = "s1=20394&s2=1180703&s3=51987&s5=backuser&click_id=a78aa3z52qq8w3ya8a&iexpp=1&j1=1&j3=1".split('&');
+
+    let nQueryKeys = [];
+    for (let j=0;j<nQuery.length;j++) {
+        nQueryKeys.push(nQuery[j].split('=')[0]);
+    }
+
+    for (let j=0;j<lQuery.length;j++) {
+        let tmp = lQuery[j].split('=');
+        if (nQueryKeys.indexOf(tmp[0]) === -1) {
+            nQuery.push(tmp[0] + "=" + tmp[1]);
+        }
+    }
+
+    url = url + '?' + nQuery.join("&");
+    try {
+        history.pushState({}, '', url);
+        history.pushState({}, '', url);
+
+        window.onpopstate = function (ev) {
+            if (ev['state']) {
+                window.exit = curHref.indexOf('&iexpp=1') !== -1;
+                if (imiBBQ.length > 0) {
+                    let clb = imiBBQ.pop();
+                    if (clb['fnc'] === 'nortb') {
+                        if (url.indexOf("?") !== -1) {
+                            url = url + "&nortb=" + clb['p'][0];
+                        } else {
+                            url = url + "?nortb=" + clb['p'][0];
+                        }
+                        location.replace(url);
+                    } else {
+                        clb['fnc'].apply(null, clb['p']);
+                    }
+                } else {
+                    location.replace(url);
+                }
+            }
+        };
+    } catch (ex) {}
+}
+
+!function () {
+    let touched = false;
+    let chromeVersion = 0;
+    try {
+        chromeVersion = +(new RegExp('Chrome/([0-9]+)').exec(navigator.userAgent)[1]);
+    } catch (e) {
+        chromeVersion = 0;
+    }
+    if (chromeVersion >= 75) {
+        window.addEventListener('mouseup', function () {
+                if (!touched) {
+                    touched = true;
+                    setTimeout(function () {
+                            imiBB();
+                        }
+                        , 0);
+                }
+            }
+        );
+        document.addEventListener("DOMContentLoaded", function () {
+                document.body.addEventListener('touchend', function (evt) {
+                        if (!touched) {
+                            touched = true;
+                            setTimeout(function () {
+                                    imiBB();
+                                }
+                                , 0);
+                        }
+                    }
+                );
+                document.body.addEventListener('keydown', function () {
+                        if (!touched) {
+                            touched = true;
+                            setTimeout(function () {
+                                    imiBB();
+                                }
+                                , 0);
+                        }
+                    }
+                );
+            }
+        );
+    } else {
+        setTimeout(function () {
+                imiBB();
+            }
+            , 0);
+    }
+}
+();
+</script><script>document.addEventListener("DOMContentLoaded", function () {
+    var buttons = document.querySelectorAll('a');
+    window.exit = true;
+
+    window.addEventListener('beforeunload', function (e) {
+        if (window.exit) {
+            e.preventDefault();
+            e.returnValue = '?';
+        } else {
+            delete e['returnValue'];
+        }
+    });
+    for (var i = 0; i < buttons.length; i++) {
+        buttons[i].addEventListener('mousedown', function () {
+            if (this.href.indexOf('http') !== -1) {
+                window.exit = false;
+            }
+        }, false);
+        buttons[i].addEventListener('touchstart', function () {
+            if (this.href.indexOf('http') !== -1) {
+                window.exit = false;
+            }
+        }, false);
+    }
+});</script><script>var prefBClicked = false;
+document.addEventListener("DOMContentLoaded", function () {
+    if (navigator.userAgent.indexOf("Chrome") != -1 || navigator.userAgent.indexOf("Firefox") != -1 ) {
+        var th_bridge_jump_step = 0;
+        let prefB = document.getElementsByClassName("btn-prefin");
+        if (prefB.length > 0) {
+            for (let i = 0; i < prefB.length; i++) {
+                prefB[i].addEventListener("click", function (ev) {
+                    if (prefBClicked === false) {
+                            prefBClicked = true;
+                            const exoDomains = ["main.exoclick.com","main.realsrv.com","main.exdynsrv.com","s.exv6.com","s.opoxv.com","s.orbsrv.com"];
+                            let script = document.createElement('script');
+                            const firstPixel = '497';
+                            script.src = 'https://main.trafficircles.com/adx-dir-d/match-bridgejump?fp=' + firstPixel;
+                            script.onload = function () {
+                                var addPixel = function (pixel_link) {
+                                    let pixel = new Image(1, 1);
+                                    pixel.src = pixel_link;
+                                };
+                                function addExoPixel(pixelName) {
+                                    for (let e = 0; e < exoDomains.length; e++) {
+                                        addPixel("https://" + exoDomains[e] + "/tag.php?goal=" + pixelName);
+                                    }
+                                }
+                                addPixel("https://main.trafficircles.com/adv_ret/?adv_pixel_id=" + firstPixel);
+                                addPixel("https://ads.traffichunt.com/adv_ret/?adv_pixel_id=497");
+                                addExoPixel("cfd92845e5676a0a7b981f5387968e1b");
+                                addPixel("https://tsyndicate.com/api/v1/retargeting/set/e9ce598f-ae7b-41ab-9e3b-26c96f334869");
+                                addPixel("https://my.rtmark.net/img.gif?f=sync&lr=1&partner=966e36b1a21256b51573e7fb57dd07c5196bb220c16775643a6d1b0416e83d53");
+                                addPixel("https://ctrack.trafficjunky.net/ctrack?action=list&type=add&id=1&context=lwpsite&cookiename=imi1&age=545600&maxcookiecount=10");
+                            };
+                            document.body.appendChild(script);
+                            return false;
+                    }
+                });
+            }
+        }
+    }
+});</script><script>var _rup = {
+    's': 'http',
+    'h': 'onlineplus.click',
+    'p': '/site/redirectpage',
+    'q': 'ca=link&sid=285964&hid=543988&hv=hoyzg6686b992000c315c&r=H4sIAAAAAAAA%2FxTES47CMAwG4Nt4W%2F9xorgLa44yMiZIoSxaLMTj9IjNt8SCIV5Hk3JBdK78l7DCslbKYoByZ6EUa1i1UzY7eWyPHHeK24ztf57Nu7rLp5Xj0Ke8XZ3meO27ga74IYZvAAAA%2F%2F%2FxT%2F%2FfagAAAA%3D%3D'
+};</script><title>Best Dating Site</title><meta name="viewport" content="user-scalable=false, initial-scale=1.0, maximum-scale=1.0">
+
+        <link href="/landings/285964/1705483700/images/favicon.ico?t=20240704150242" rel="icon" type="image/x-icon" /><link rel="apple-touch-icon" sizes="180x180" href="/landings/285964/1705483700/images/favicon.png?t=20240704150242"><link rel="icon" type="image/png" href="/landings/285964/1705483700/images/favicon.png?t=20240704150242" sizes="32x32"><link rel="icon" type="image/png" href="/landings/285964/1705483700/images/favicon.png?t=20240704150242" sizes="16x16"><link rel="manifest" href="/landings/285964/1705483700/manifest.json?t=20240704150242"><meta name="theme-color" content="#ffffff"><meta name="msapplication-config" content="/landings/285964/1705483700/browserconfig.xml?t=20240704150242" />
+        <meta content="" name="keywords"><meta content="" name="description"><link rel="stylesheet" type="text/css" href="/landings/285964/1705483700/css/popup.css?1705483700"><link rel="stylesheet" type="text/css" href="/landings/285964/1705483700/css/style.css?1705483700"><link rel="stylesheet" type="text/css" href="/landings/285964/1705483700/css/reviews.css?1705483700"><link rel="stylesheet" type="text/css" href="/landings/285964/1705483700/css/timer.css?1705483700"><script type="text/javascript" src="/landings/285964/1705483700/js/jquery-2.2.4.min.js?1705483700"></script><script type="text/javascript" src="/landings/285964/1705483700/js/jquery.validate.min.js?1705483700"></script><script type="text/javascript" src="/landings/285964/1705483700/js/translates.js?1705483700"></script><script type="text/javascript" src="/landings/285964/1705483700/js/translates-review.js?1705483700"></script><script type="text/javascript" src="/landings/285964/1705483700/js/title_tanslate.js?1705483700"></script><script type="text/javascript" src="/landings/285964/1705483700/js/timer.js?1705483700"></script><script type="text/javascript" src="/landings/285964/1705483700/js/translate-popup-timer.js?1705483700"></script></head><body  style="" ><div style="display: none;"><img src="/landings/285964/1705483700/images/110010_4.jpg" alt=""></div><!--<div class="pop-up--timer"><div class="popUp--block"><div class="countdown-title countdownTitle">Увага!        </div><div class="countdown-message countdownMessage">Безкоштовна реєстрація закінчиться через:        </div><div class="timer-wrapper"><div class="timer-section"><div id="min-dozens" class="timer">0                </div><div id="min-unity" class="timer">6                </div></div>:            <div class="timer-section"><div id="sec-dozens" class="timer">4                </div><div id="sec-unity" class="timer">9                </div></div></div><button class="btn btn--primary js-pop-button-close text05">ОК        </button></div></div> --><div class="main"><div class="header"><div class="header-inner"><div class="header-logo"><img src="/landings/285964/1705483700/images/logo_inst3.svg" alt=""></div><div class="header-nav"><span class="icon icon-home"></span><span class="icon icon-search"></span><span class="icon icon-plus"></span><span class="icon icon-like"></span><span class="icon icon-user"></span></div></div></div><div class="stepbox"><!--  <div class="timer-wrapper"><div class="timer-section"><div id="min-dozens-1" class="timer">0                </div><div id="min-unity-1" class="timer">0                </div></div>:            <div class="timer-section"><div id="sec-dozens-1" class="timer">0                </div><div id="sec-unity-1" class="timer">0                </div></div></div><div class="position"><span class="pos_girls-found"><span class="num-girls">126                </span><span class="text35">girls found                </span></span><span class="pos_city"><img src="/landings/285964/1705483700/images/icon-city.svg" alt=""><span class="text36">IN                </span>meppel            </span></div>--><div class="step step-1 current"><div class="step__inner"><div class="step__header"><h1>                            WARNING!                        </h1></div><div class="step__body"><p>                            You will see nude photos. Please be discreet.                        </p></div><div class="step__footer"><div class="btnbox"><a class="btn btn--primary next btn-next" href="javascript:void(0)">                                Next                            </a></div></div></div><!--  <div class="safety-block"><ul><li><img src="/landings/285964/1705483700/images/unlock.svg" alt=""><h4 class="sb-title-1 sbTitle1">Secure                        </h4><p class="sb-text-1 sbText1">We use 256 bit Encription                        </p></li><li><img src="/landings/285964/1705483700/images/shield.svg" alt=""><h4 class="sb-title-2 sbTitle2">Private                        </h4><p class="sb-text-2 sbText2">Your Privacy is Guaranteed                        </p></li><li><img src="/landings/285964/1705483700/images/password.svg" alt=""><h4 class="sb-title-3 sbTitle3">Safe                        </h4><p class="sb-text-3 sbText3">100% Safe, Private and Secure                        </p></li></ul></div>--></div><div class="step step-2"><div class="step__inner"><div class="step__header"><h6>                            question 1                        </h6></div><div class="step__body"><p>                            Many of these women are desperate single moms and cheating wives looking for some fun. They                            could be your neighbors or someone you know. Do you agree to keep the identity of these                            women a secret?                        </p></div><div class="step__footer"><div class="btnbox"><a class="btn btn--accent  slick-next btn-no next" href="javascript:void(0)">                                no                            </a><a class="btn btn--primary  next btn-yes" href="javascript:void(0)">                                yes                            </a></div></div></div></div><div class="step step-3"><div class="step__inner"><div class="step__header"><h6>                            question 2                        </h6></div><div class="step__body"><p>                            These women have asked us to not allow men that are seeking a &quot;relationship&quot;. They                            only desire quick sex. Not dating. Do you agree to this request?                        </p></div><div class="step__footer"><div class="btnbox"><a class="btn btn--accent  slick-next btn-no next" href="javascript:void(0)">                                no                            </a><a class="btn btn--primary  next btn-yes" href="javascript:void(0)">                                yes                            </a></div></div></div></div><div class="step step-9"><div class="step__inner"><div class="step__header"><h1>                            thank you!                        </h1></div><div class="step__body"><p>                            You may now see our list and photos of women who are in your area. Again, please keep their                            identity a secret. Click on the &quot;Continue&quot; button and search on the basis of your                            answers.                        </p></div><div class="step__footer"><div class="btnbox"><a class="btn btn--primary btn-fin btn-continue btn-fin redirect-url-button" href="http://onlineplus.click/site/redirectpage?ca=link&sid=285964&hid=543988&hv=hoyzg6686b992000c315c&r=H4sIAAAAAAAA%2FxTES47CMAwG4Nt4W%2F9xorgLa44yMiZIoSxaLMTj9IjNt8SCIV5Hk3JBdK78l7DCslbKYoByZ6EUa1i1UzY7eWyPHHeK24ztf57Nu7rLp5Xj0Ke8XZ3meO27ga74IYZvAAAA%2F%2F%2FxT%2F%2FfagAAAA%3D%3D">                                Continue                            </a></div></div></div><!--<div class="safety-block"><ul><li><img src="/landings/285964/1705483700/images/unlock.svg" alt=""><h4 class="sb-title-1 sbTitle1">              Secure                                    </h4><p class="sb-text-1 sbText1">              We use 256 bit Encription                                    </p></li><li><img src="/landings/285964/1705483700/images/shield.svg" alt=""><h4 class="sb-title-2 sbTitle2">              Private                                    </h4><p class="sb-text-2 sbText2">              Your Privacy is Guaranteed                                    </p></li><li><img src="/landings/285964/1705483700/images/password.svg" alt=""><h4 class="sb-title-3 sbTitle3">              Safe                                    </h4><p class="sb-text-3 sbText3">              100% Safe, Private and Secure                                    </p></li></ul></div>--></div></div><!--<div class="comments_list"><div class="comments_list_icons"><span class="like_wrap"><span class="icon-like2"><img src="/landings/285964/1705483700/images/icon-like2.svg" alt=""></span><span class="icon-message"><img src="/landings/285964/1705483700/images/icon-message.svg" alt=""></span><span class="icon-direct"><img src="/landings/285964/1705483700/images/icon-direct.svg" alt=""></span></span><span class="comments_list_icons_item item_views"><span class="icon-flag"><img src="/landings/285964/1705483700/images/icon-flag.svg" alt=""></span></span></div><div class="comments_list_row"><div class="photo_avatar"><img class="ava1" src="/landings/285964/1705483700/images/1-eu.png"></div><div class="reviews"><div class="comment_name commentName1">Albert_69                </div><div class="comment_text commentText1">Cool site! I recommend it to everyone!                </div><div class="comments_list_btns"><span class="comments_list_btn"><i class="custom-icon custom-icon-comment"></i><span class="commentWord">Comment                        </span></span></div><div class="icon-reaction reaction-like"></div></div></div><div class="comments_list_row"><div class="photo_avatar"><img class="ava2" src="/landings/285964/1705483700/images/2-eu.png"></div><div class="reviews"><div class="comment_name commentName2">Lucky                </div><div class="comment_text commentText2">For those who are tired of Tinder. Everything is much easier and cooler.                </div><div class="comments_list_btns"><span class="comments_list_btn"><i class="custom-icon custom-icon-comment"></i><span class="commentWord">Comment                        </span></span></div><div class="icon-reaction reaction-like"></div></div></div><div class="comments_list_row"><div class="photo_avatar"><img class="ava3" src="/landings/285964/1705483700/images/3-eu.png"></div><div class="reviews"><div class="comment_name commentName3">Anonymous                </div><div class="comment_text commentText3">I registered yesterday, the main thing is that my husband doesn't find out!                </div><div class="comments_list_btns"><span class="comments_list_btn"><i class="custom-icon custom-icon-comment"></i><span class="commentWord">Comment                        </span></span></div><div class="icon-reaction reaction-like"></div></div></div><div class="comments_list_row"><div class="photo_avatar"><img class="ava4" src="/landings/285964/1705483700/images/4-eu.png"></div><div class="reviews"><div class="comment_name commentName4">Alex                </div><div class="comment_text commentText4">The link was given by a friend, it's just top! There's no easier way to find someone!                </div><div class="comments_list_btns"><span class="comments_list_btn"><i class="custom-icon custom-icon-comment"></i><span class="commentWord">Comment                        </span></span></div><div class="icon-reaction reaction-like"></div></div></div><div class="comments_list_row"><div class="photo_avatar"><img class="ava5" src="/landings/285964/1705483700/images/5-eu.png"></div><div class="reviews"><div class="comment_name commentName5">Stasy_777                </div><div class="comment_text commentText5">After my divorce I am not looking for a serious relationship. This site is just perfect for me.                </div><div class="comments_list_btns"><span class="comments_list_btn"><i class="custom-icon custom-icon-comment"></i><span class="commentWord">Comment                        </span></span></div><div class="icon-reaction reaction-like"></div></div></div><div class="comments_list_row"><div class="photo_avatar"><img class="ava6" src="/landings/285964/1705483700/images/6-eu.png"></div><div class="reviews"><div class="comment_name commentName6">Kiddo                </div><div class="comment_text commentText6">Didn't even know there were so many beautiful ladies in my area who text firs                </div><div class="comments_list_btns"><span class="comments_list_btn"><i class="custom-icon custom-icon-comment"></i><span class="commentWord">Comment                        </span></span></div><div class="icon-reaction reaction-like"></div></div></div><div class="comments_list_row"><div class="photo_avatar"><img class="ava7" src="/landings/285964/1705483700/images/7-eu.png"></div><div class="reviews"><div class="comment_name commentName7">Ian_19                </div><div class="comment_text commentText7">Always wanted to find a mature hot mom. Anonymity guaranteed!                </div><div class="comments_list_btns"><span class="comments_list_btn"><i class="custom-icon custom-icon-comment"></i><span class="commentWord">Comment                        </span></span></div><div class="icon-reaction reaction-like"></div></div></div><div class="comments_list_row"><div class="photo_avatar"><img class="ava8" src="/landings/285964/1705483700/images/8-eu.png"></div><div class="reviews"><div class="comment_name commentName8">Bro                </div><div class="comment_text commentText8">If you do not want to waste time on romance and other nonsense - this site is for you!                </div><div class="comments_list_btns"><span class="comments_list_btn"><i class="custom-icon custom-icon-comment"></i><span class="commentWord">Comment                        </span></span></div><div class="icon-reaction reaction-like"></div></div></div></div>--></div><div class="progress"><div class="bar"></div></div><div class="videobgbox"><video class="video" loop autoplay muted playsinline=""><source src="/landings/285964/1705483700/images/4.mp4" type="video/mp4"></video></div><img id="path" class="img-path" style="display: none;" src="/landings/285964/1705483700/images/blocked-icon.png"><div id='wrp-id'></div><script>var ortbConf = {'feed':3156,'model':'ecpm'};</script></body></html>
